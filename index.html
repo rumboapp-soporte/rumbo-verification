@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0C2043" />
+  <link rel="icon" href="./icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* Rumbo · páginas web de la cuenta. Estilo carta náutica: crema, tinta azul marino y coral. */
+:root{
+  --fondo:#F5F1E8;
+  --hundido:#EEE7D9;
+  --papel:#FFFCF6;
+  --tinta:#0C2043;
+  --suave:#47557A;
+  --tenue:#8A90A2;
+  --linea:#E3DACA;
+  --coral:#E8572F;
+  --coral-suave:#FBE3D8;
+  --coral-texto:#B83F1C;
+  --verde:#1E7A55;
+  --verde-suave:#DDF0E6;
+  --rojo:#C23B2A;
+  --rojo-suave:#F8DEDA;
+  --sombra:0 24px 60px rgba(12,32,67,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;
+  color:var(--tinta);
+  background:var(--fondo);
+  font-family:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-weight:500;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* Cuadrícula de carta náutica */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(12,32,67,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(12,32,67,.045) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+a{color:inherit}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;letter-spacing:-.02em;margin:0}
+
+.pagina{min-height:100vh;display:flex;flex-direction:column}
+.cabecera,.pie{width:min(1080px,calc(100% - 32px));margin:0 auto}
+.cabecera{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.marca{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:"Fraunces",Georgia,serif;font-size:1.25rem;font-weight:600}
+.marca img{width:38px;height:38px;border-radius:11px}
+.enlace-ayuda{font-size:.88rem;font-weight:700;text-decoration:none;color:var(--suave);padding:9px 14px;border:1px solid var(--linea);border-radius:999px;background:var(--papel)}
+
+.contenido{flex:1;width:min(520px,calc(100% - 32px));margin:0 auto;padding:40px 0 64px;display:flex;flex-direction:column;justify-content:center}
+.contenido.ancho{width:min(820px,calc(100% - 32px))}
+
+.tarjeta{position:relative;overflow:hidden;background:var(--papel);border:1px solid var(--linea);border-radius:24px;padding:34px 30px;box-shadow:var(--sombra)}
+.rosa{position:absolute;right:-70px;top:-70px;width:220px;height:220px;opacity:.07;pointer-events:none}
+
+.etiqueta{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-texto);background:var(--coral-suave);padding:6px 10px;border-radius:8px;margin-bottom:16px}
+.etiqueta.verde{color:var(--verde);background:var(--verde-suave)}
+.etiqueta.rojo{color:var(--rojo);background:var(--rojo-suave)}
+.tarjeta h1{font-size:clamp(1.9rem,6vw,2.4rem);line-height:1.08;margin-bottom:12px}
+.tarjeta h1 em{font-style:italic;color:var(--coral)}
+.entrada{color:var(--suave);line-height:1.65;margin:0}
+
+.icono{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;margin-bottom:22px}
+.icono.ok{background:var(--verde-suave);color:var(--verde)}
+.icono.error{background:var(--rojo-suave);color:var(--rojo)}
+.icono.marino{background:var(--tinta);color:var(--coral)}
+.icono svg{width:30px;height:30px}
+
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:14px;border:0;cursor:pointer;text-decoration:none;font:inherit;font-weight:800;font-size:.95rem;transition:transform .15s ease,opacity .15s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.principal{background:var(--coral);color:#fff}
+.boton.marino{background:var(--tinta);color:var(--fondo)}
+.boton.secundario{background:transparent;color:var(--tinta);border:1px solid var(--linea)}
+.boton.peligro{background:var(--rojo);color:#fff}
+.boton:disabled{opacity:.55;cursor:default;transform:none}
+.boton.ancho{width:100%}
+
+.nota{margin-top:20px;font-size:.82rem;color:var(--tenue);line-height:1.55}
+.nota a{color:var(--coral-texto);font-weight:700}
+
+/* Formulario */
+.campo{margin-bottom:14px}
+label{display:block;font-size:.82rem;font-weight:800;margin-bottom:7px;color:var(--suave)}
+.caja{position:relative}
+input{width:100%;height:52px;padding:0 50px 0 16px;border:1px solid var(--linea);border-radius:14px;background:var(--fondo);color:var(--tinta);font:inherit;font-size:1rem;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus{border-color:var(--coral);background:#fff;box-shadow:0 0 0 4px rgba(232,87,47,.14)}
+.ver{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;border-radius:10px;background:transparent;color:var(--tenue);cursor:pointer;font-size:.78rem;font-weight:800}
+.ver:hover{background:var(--hundido)}
+.requisito{font-size:.8rem;color:var(--tenue);margin:2px 0 18px}
+
+.estado{display:none;margin-top:14px;padding:13px 14px;border-radius:12px;font-size:.88rem;line-height:1.5}
+.estado.visible{display:block}
+.estado.cargando{background:var(--hundido);color:var(--suave)}
+.estado.error{background:var(--rojo-suave);color:var(--rojo)}
+.estado.ok{background:var(--verde-suave);color:var(--verde)}
+[hidden]{display:none!important}
+
+/* Eliminar cuenta */
+.hero{padding:20px 0 8px}
+.hero h1{font-size:clamp(2.2rem,7vw,3.4rem);line-height:1.03;margin:14px 0 14px}
+.hero h1 em{font-style:italic;color:var(--coral)}
+.hero p{color:var(--suave);line-height:1.7;max-width:640px;margin:0}
+.bloque{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:26px;margin-top:16px}
+.bloque h2{font-size:1.35rem;margin:6px 0 10px}
+.bloque p{color:var(--suave);line-height:1.65;margin:0}
+.bloque p+p{margin-top:10px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-texto)}
+.pasos{counter-reset:p;list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
+.pasos li{counter-increment:p;position:relative;padding:12px 14px 12px 48px;background:var(--fondo);border-radius:12px;color:var(--suave);line-height:1.5}
+.pasos li::before{content:counter(p);position:absolute;left:14px;top:11px;width:24px;height:24px;border-radius:50%;background:var(--tinta);color:var(--fondo);display:grid;place-items:center;font-size:.78rem;font-weight:800}
+.lista{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.lista li{position:relative;padding:10px 12px 10px 36px;background:var(--fondo);border-radius:12px;color:var(--suave);line-height:1.5;font-size:.93rem}
+.lista li::before{content:"";position:absolute;left:14px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--coral)}
+.aviso{margin-top:18px;padding:18px;border-radius:14px;background:var(--rojo-suave)}
+.aviso strong{display:block;color:var(--rojo);margin-bottom:6px}
+.aviso p{color:#7d3a31;font-size:.9rem}
+
+.pie{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 0 28px;border-top:1px solid var(--linea);font-size:.8rem;color:var(--tenue)}
+.pie nav{display:flex;gap:16px;flex-wrap:wrap}
+.pie a{text-decoration:none;color:var(--suave)}
+
+@media(max-width:560px){
+  .tarjeta{padding:28px 22px}
+  .acciones{flex-direction:column}
+  .boton{width:100%}
+  .enlace-ayuda{font-size:.8rem;padding:8px 12px}
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --fondo:#0A1428;--hundido:#070F1F;--papel:#111E38;--tinta:#F2EDE2;--suave:#B4BCD0;--tenue:#7D88A3;--linea:#21325A;
+    --coral:#FF7650;--coral-suave:#3A2128;--coral-texto:#FF9C7E;--verde:#4CC28E;--verde-suave:#123528;--rojo:#FF6E5C;--rojo-suave:#3B1A1C;
+    --sombra:0 24px 60px rgba(0,0,0,.35);
+  }
+  body::before{background-image:linear-gradient(rgba(242,237,226,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,237,226,.04) 1px,transparent 1px)}
+  .boton.marino{background:#F2EDE2;color:#0A1428}
+  .icono.marino{background:#1B2C52}
+  .aviso p{color:#F3C2BA}
+}
+
+  </style>
+  <script>
+// Configuración de las páginas web de Rumbo.
+// La clave es la PÚBLICA de Supabase (la misma que va en la app). Nunca pongas aquí la secreta.
+window.RUMBO = {
+  supabaseUrl: "https://jntwzniraxuhbmcfbmmu.supabase.co",
+  supabaseKey: "sb_publishable_ZXYb3pc_BIKvUiiBddUNTw_Xkxabshb",
+  // Correo de soporte: escríbelo aquí (aparece en «Eliminar cuenta» y en la ayuda)
+  correoSoporte: "",
+  // Tu nombre (o el de tu empresa) como responsable de los datos
+  responsable: "",
+};
+
+  </script>
+  <title>Correo verificado · Rumbo</title>
+  <meta name="description" content="Confirmación del correo de tu cuenta de Rumbo." />
+  <meta name="robots" content="noindex,nofollow" />
+</head>
+<body>
+  <div class="pagina">
+    <header class="cabecera">
+      <a class="marca" href="https://rumboapp-soporte.github.io/web/"><img src="./icon.png" alt="" /><span>Rumbo</span></a>
+      <a class="enlace-ayuda" data-ayuda href="#" data-ir="rumbo-delete-account/#contacto">¿Necesitas ayuda?</a>
+    </header>
+    <main class="contenido">
+      <section class="tarjeta" id="ok">
+        <svg class="rosa" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="70"/></g><g fill="currentColor"><path d="M100 4 L108 92 L100 100 L92 92Z"/><path d="M196 100 L108 108 L100 100 L108 92Z"/><path d="M100 196 L92 108 L100 100 L108 108Z"/><path d="M4 100 L92 92 L100 100 L92 108Z"/></g></svg>
+        <div class="icono ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <span class="etiqueta verde">Cuenta confirmada</span>
+        <h1>¡Listo, <em>ya puedes zarpar!</em></h1>
+        <p class="entrada">Tu correo está verificado. Vuelve a Rumbo e inicia sesión con tu email y tu contraseña para empezar a preparar tu examen.</p>
+        <div class="acciones">
+          <a class="boton principal" href="rumbo://">Abrir Rumbo</a>
+        </div>
+        <p class="nota">Si el botón no abre la app, ábrela tú desde el móvil. Ya puedes cerrar esta ventana.</p>
+      </section>
+
+      <section class="tarjeta" id="error" hidden>
+        <svg class="rosa" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="70"/></g><g fill="currentColor"><path d="M100 4 L108 92 L100 100 L92 92Z"/><path d="M196 100 L108 108 L100 100 L108 92Z"/><path d="M100 196 L92 108 L100 100 L108 108Z"/><path d="M4 100 L92 92 L100 100 L92 108Z"/></g></svg>
+        <div class="icono error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 7v6"/><path d="M12 17h.01"/></svg></div>
+        <span class="etiqueta rojo">Enlace no válido</span>
+        <h1>Este enlace ya <em>no sirve</em></h1>
+        <p class="entrada" id="error-texto">El enlace ha caducado o ya se había usado. Si ya confirmaste tu correo, inicia sesión en la app. Si no, vuelve a registrarte con el mismo email para recibir un enlace nuevo.</p>
+        <div class="acciones">
+          <a class="boton marino" href="rumbo://">Abrir Rumbo</a>
+          <a class="boton secundario" data-ayuda href="#" data-ir="rumbo-delete-account/#contacto">Pedir ayuda</a>
+        </div>
+      </section>
+    </main>
+    <footer class="pie">
+      <span>© <span data-anio></span> Rumbo · Prepara tu título náutico</span>
+      <nav><a href="#" data-ir="rumbo-privacy/">Privacidad</a><a href="#" data-ir="rumbo-delete-account/">Eliminar cuenta</a><a data-ayuda href="#" data-ir="rumbo-delete-account/#contacto">Soporte</a></nav>
+    </footer>
+  </div>
+  <script>
+    document.querySelectorAll("[data-ir]").forEach((a) => (a.href = location.origin + "/" + a.dataset.ir));
+    document.querySelectorAll("[data-anio]").forEach((e) => (e.textContent = new Date().getFullYear()));
+    const correo = (window.RUMBO && window.RUMBO.correoSoporte) || "";
+    if (correo) document.querySelectorAll("[data-ayuda]").forEach((a) => (a.href = "mailto:" + correo + "?subject=Rumbo%20-%20Ayuda"));
+  </script>
+  <script>
+    const q = new URLSearchParams(location.search);
+    const h = new URLSearchParams(location.hash.replace(/^#/, ""));
+    const error = q.get("error_description") || h.get("error_description") || q.get("error") || h.get("error");
+    if (error) {
+      document.getElementById("ok").hidden = true;
+      document.getElementById("error").hidden = false;
+    }
+    // No dejamos los códigos del enlace en la barra de direcciones
+    if (location.hash || location.search) history.replaceState({}, document.title, location.pathname);
+  </script>
+</body>
+</html>
